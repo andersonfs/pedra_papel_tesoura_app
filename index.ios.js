@@ -9,45 +9,46 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View, 
+  Button
 } from 'react-native';
 
-export default class pedra_papel_tesoura_app extends Component {
+
+class MeuComponente extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+    return  (
+      <View>
+        <Text>{this.props.teste}</Text>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+class pedra_papel_tesoura_app extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = { texto : 'Texto teste padrão' };
+    this.clicks = 1;
+  }
+
+  alteraTexto() {
+    this.setState({ texto : 'Texto alterado ' + this.clicks });
+    this.clicks++;    
+  }
+  
+  render() {
+    return (
+      <View> 
+        <MeuComponente teste={this.state.texto}></MeuComponente>
+        <Button
+          title='Botão'
+          onPress={() => { this.alteraTexto()}}
+        />
+      </View>
+      
+    );
+  }
+}
 
 AppRegistry.registerComponent('pedra_papel_tesoura_app', () => pedra_papel_tesoura_app);

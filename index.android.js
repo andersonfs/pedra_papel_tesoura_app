@@ -9,7 +9,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View, 
+  Button
 } from 'react-native';
 
 
@@ -17,9 +18,7 @@ class MeuComponente extends Component {
   render() {
     return  (
       <View>
-        <Text>{this.props.propriedade1}</Text>
-        <Text>{this.props.xyz}</Text>
-        <Text>{this.props.p}</Text>
+        <Text>{this.props.teste}</Text>
       </View>
     );
   }
@@ -27,9 +26,27 @@ class MeuComponente extends Component {
 
 class pedra_papel_tesoura_app extends Component {
   
+  constructor(props) {
+    super(props);
+    this.state = { texto : 'Texto teste padrão' };
+    this.clicks = 1;
+  }
+
+  alteraTexto() {
+    this.setState({ texto : 'Texto alterado ' + this.clicks });
+    this.clicks++;    
+  }
+  
   render() {
     return (
-      <MeuComponente propriedade1='Banana' xyz='Abacaxi' p='Uva'></MeuComponente>
+      <View> 
+        <MeuComponente teste={this.state.texto}></MeuComponente>
+        <Button
+          title='Botão'
+          onPress={() => { this.alteraTexto()}}
+        />
+      </View>
+      
     );
   }
 }
